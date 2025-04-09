@@ -5,20 +5,31 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 public class Log {
-    private static final File LOG_FILE;
+    private static File LOG_FILE;
     private static final PrintStream OUT;
-    static {
-        String logPath = System.getenv("CATALINA_HOME") + "/logs/tcagent.log";
-        LOG_FILE = new File(logPath);
-        try {
-            if (LOG_FILE.exists()) {
-                LOG_FILE.delete();
-            }
 
-            LOG_FILE.createNewFile();
-            OUT = new PrintStream(LOG_FILE);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to create log file", e);
+    static {
+        String catalinaHome = System.getProperty("catalina.home");
+        if (catalinaHome == null) {
+            catalinaHome = System.getenv("CATALINA_HOME");
+        }
+
+        if (catalinaHome != null) {
+            String logPath = catalinaHome + "/logs/tcagent.log";
+            LOG_FILE = new File(logPath);
+            try {
+                if (LOG_FILE.exists()) {
+                    LOG_FILE.delete();
+                }
+
+                LOG_FILE.createNewFile();
+                OUT = new PrintStream(LOG_FILE);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to create log file", e);
+            }
+        } else {
+            System.err.println("CATALINA_HOME not set, using System.out for logging");
+            OUT = System.out;
         }
     }
 
