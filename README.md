@@ -11,6 +11,8 @@ Unlock enterprise features of TeamCity for free.
 
 ![](success.png)
 
+✅ Working on Teamcity 2025.03.1
+
 ---
 
 ## Usage
