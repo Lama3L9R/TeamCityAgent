@@ -45,16 +45,16 @@ A license is in JWT format, which has three parts: header, payload, and signatur
 They are joined by `.`.
 Header and payload are base64 encoded (base64 without `=`) JSON objects, and 
 all signature verifications are bypassed, so 
-you can write whatever you like in signature part.
-There aren't anything for you to customize in header. 
+you can write whatever you like in the signature part.
+There isn't anything for you to customize in the header. 
 So you can just copy the header from the pre-generated license, or use the following one.
 
 ```
 eyJhbGciOiJSUzUxMiIsInR5cCI6IiIsIng1YyI6W119
 ```
 
-First open your web browser and press F12 to open the developer tools.
-Then go to the `Console` tab. Edit and run the following code to generate payload.
+First, open your web browser and press F12 to open the developer tools.
+Then go to the `Console` tab. Edit and run the following code to generate a payload.
 
 ```javascript
 btoa(JSON.stringify({
@@ -89,3 +89,5 @@ btoa(JSON.stringify({
 ## TODOs
 - [ ] Support ServerLicense
 - [ ] Generic hooks (name independent hooking)
+	+ It seems that JetBrains doesn't change their obfuscated names
+	+ So, at least for now, generic hooks aren't necessary.
